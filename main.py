@@ -1,13 +1,17 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
+
+
+def read_power_level():
+    pass
 
 
 @app.route("/", methods=["GET", "POST"])
 async def home():
     if request.method == "POST":
-        print("TESTING")
-        print(request.form.getlist("test state"))
+        print(request.form["submit_button"])
+
     return render_template("index.html")
 
 
@@ -21,9 +25,8 @@ async def logs_page():
 async def test_page():
     if request.method == "POST":
         print("HELLO")
-        print(request.form.getlist("test state"))
     else:
-        return url_for('test_page')
+        return render_template("test.html")
 
 
 @app.route("/settings")
@@ -31,6 +34,9 @@ async def settings_page():
     return "settings"
 
 
-@app.route("/predict")
+@app.route("/predict", methods=["GET", "POST"])
 async def predict_page():
-    return "predictions!!!"
+    if request.method == "POST":
+        return "Data"
+    else:
+        return render_template("predictions.html")
