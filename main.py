@@ -1,6 +1,17 @@
 from flask import Flask, render_template, request
+import csv
+import datetime
+from engcomp import Predictor
+
 
 app = Flask(__name__)
+
+
+with open("testing/our_data.csv", "r") as csvfile:
+    reader = csv.DictReader(csvfile)
+    weather_data = list(reader)
+    for row in weather_data:
+        row["Date time"] = datetime.datetime.fromisoformat(row["Date time"])
 
 
 def read_power_level():
@@ -38,9 +49,26 @@ async def settings_page():
     return "settings"
 
 
+
+def get_closest_time(date_time):
+    best_delta = datetime.timedelta(10000000)
+    best_date_time = None
+    for data in weather_data:
+        if date_time - data["Date time"] < best_delta:
+            best_delta = date_time - data["Date time"]
+            best_date_time = data["Date time"]
+    return best_date_time
+
 @app.route("/predict", methods=["GET", "POST"])
 async def predict_page():
     if request.method == "POST":
+        time = get_closest_time(datetime.datetime.fromisoformat(request.form["data-time"]))
+        for ele in weather_data:
+            if ele["Date time"] == time:
+                with open("temp.csv", "w+") as write:
+                    writer = csv.writer(write)
+                    writer.writerow([list(ele.values())[1:]])
+                    return Predictor().predict(write)
         return "Data"
     else:
         return render_template("predictions.html")
