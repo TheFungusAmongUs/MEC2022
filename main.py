@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-
+from flask import render_template
+from flask import Flask, request
 app = Flask(__name__)
 
 
@@ -27,3 +27,6 @@ async def settings_page():
 @app.route("/predict")
 async def predict_page():
     return "predictions!!!"
+
+
+
