@@ -7,7 +7,7 @@ app = Flask(__name__)
 async def home():
     return ""
 
-
+# a change
 @app.route("/logs")
 async def logs_page():
     return "Here are the logs:"
