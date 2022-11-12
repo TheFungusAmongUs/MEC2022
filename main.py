@@ -7,12 +7,16 @@ def read_power_level():
     pass
 
 
+test_status: bool = False
+
+
 @app.route("/", methods=["GET", "POST"])
 async def home():
+    global test_status
     if request.method == "POST":
         print(request.form["submit_button"])
-
-    return render_template("index.html")
+        test_status = not test_status
+    return render_template("index.html", test_status=str(test_status))
 
 
 # a change
