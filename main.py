@@ -11,3 +11,8 @@ async def home():
 @app.route("/logs")
 async def logs_page():
     return "Here are the logs:"
+
+
+@app.route("/test")
+async def test_page():
+    return "Toggle test mode:"
