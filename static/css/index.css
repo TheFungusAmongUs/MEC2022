@@ -1,10 +1,7 @@
-h1 {
-    position: absolute;
+.main {
+    position: center;
     left: 50%;
-    top: 20%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    font-size: 4rem;
+    font-size: 2rem;
     text-align: center;
 }
  /* The switch - the box around the slider */
