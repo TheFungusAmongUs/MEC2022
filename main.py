@@ -21,3 +21,8 @@ async def test_page():
 @app.route("/settings")
 async def settings_page():
     return "settings"
+
+
+@app.route("/predict")
+async def predict_page():
+    return "predictions!!!"
