@@ -16,3 +16,8 @@ async def logs_page():
 @app.route("/test")
 async def test_page():
     return "Toggle test mode:"
+
+
+@app.route("/settings")
+async def settings_page():
+    return "settings"
