@@ -29,6 +29,11 @@
           <input type="button" name="new entry" value = "press for new row">
           <input type="submit" >
       </form>
+       % if pred %
+      <center>
+        <h3>There is a {{ pred }}% chance of bad weather</h3>
+      </center>
+      % endif %
       <a href="/" >Go Back home</a>
   </div>
   </body>
